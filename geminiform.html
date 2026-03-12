@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tommy's 3D Dimension | Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes move-twinkle {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-1000px); }
+    }
+    .star-layer { animation: move-twinkle 60s linear infinite; }
+    .tilt-card { perspective: 1000px; }
+    .tilt-inner {
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    @media (min-width: 768px) {
+        .tilt-card:hover .tilt-inner { transform: rotateX(4deg) rotateY(2deg); }
+    }
+    .input-error { border-color: #ef4444 !important; }
+    .error-text { color: #ef4444; font-size: 0.7rem; margin-top: 0.25rem; display: none; }
+  </style>
+</head>
+<body class="bg-[#020617] flex min-h-screen items-center justify-center overflow-x-hidden font-sans p-6">
+
+  <div class="fixed inset-0 z-0 opacity-40">
+    <div class="star-layer absolute inset-0 bg-[radial-gradient(#fff_1.2px,transparent_1.2px)] [background-size:50px_50px]"></div>
+    <div class="star-layer absolute inset-0 bg-[radial-gradient(#fff_0.8px,transparent_0.8px)] [background-size:80px_80px] opacity-50" style="animation-duration: 100s;"></div>
+  </div>
+
+  <div class="tilt-card relative z-10 w-full max-w-lg">
+    <div class="tilt-inner group relative overflow-hidden rounded-[2.5rem] p-[2px]">
+      
+      <div class="absolute inset-[-500%] animate-[spin_6s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_150deg,#22d3ee_180deg,transparent_210deg,transparent_320deg,#a855f7_360deg)]"></div>
+
+      <div class="relative flex flex-col justify-center rounded-[38px] bg-slate-950/95 backdrop-blur-3xl px-8 py-10 sm:px-12 shadow-2xl border border-white/5">
+        
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-black tracking-tight text-white uppercase">Create Account</h2>
+          <p class="text-slate-500 text-[10px] font-bold tracking-[0.2em] uppercase mt-2">
+            Join the <span class="text-cyan-400">Tommy_01</span> Network
+          </p>
+        </div>
+
+        <form id="signUpForm" class="space-y-5" novalidate>
+          
+          <div class="relative group">
+            <input type="text" id="fullname" placeholder=" " required 
+              class="peer w-full border-b border-slate-700 bg-transparent py-2 text-white outline-none transition-all focus:border-cyan-400" />
+            <label class="absolute left-0 top-2 text-slate-500 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">Full Name</label>
+            <p class="error-text">Please enter your name</p>
+          </div>
+
+          <div class="relative group">
+            <input type="email" id="email" placeholder=" " required 
+              class="peer w-full border-b border-slate-700 bg-transparent py-2 text-white outline-none transition-all focus:border-cyan-400" />
+            <label class="absolute left-0 top-2 text-slate-500 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">Email Address</label>
+            <p class="error-text">Enter a valid email address</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="relative group">
+              <input type="password" id="pass" placeholder=" " required 
+                class="peer w-full border-b border-slate-700 bg-transparent py-2 text-white outline-none transition-all focus:border-purple-500" />
+              <label class="absolute left-0 top-2 text-slate-500 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-purple-400 peer-[:not(:placeholder-shown)]:-top-4">Password</label>
+            </div>
+
+            <div class="relative group">
+              <input type="password" id="confirmPass" placeholder=" " required 
+                class="peer w-full border-b border-slate-700 bg-transparent py-2 text-white outline-none transition-all focus:border-purple-500" />
+              <label class="absolute left-0 top-2 text-slate-500 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-purple-400 peer-[:not(:placeholder-shown)]:-top-4">Confirm</label>
+            </div>
+          </div>
+          <p id="match-error" class="error-text">Passwords do not match</p>
+
+          <div class="flex items-center gap-3 pt-2">
+            <input type="checkbox" id="terms" class="accent-cyan-500 h-4 w-4 rounded bg-slate-900 border-slate-700" required>
+            <label for="terms" class="text-[10px] text-slate-400 uppercase tracking-tighter">I agree to the <span class="text-cyan-400 cursor-pointer">Terms of Service</span></label>
+          </div>
+
+          <div class="relative pt-6">
+             <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 blur-xl opacity-20"></div>
+             <button type="submit" class="relative w-full rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 py-4 font-black text-white shadow-2xl transition-all hover:brightness-110 active:scale-[0.98] tracking-[0.2em]">
+              REGISTER ACCOUNT
+            </button>
+          </div>
+        </form>
+
+        <p class="mt-8 text-center text-[10px] text-slate-500 uppercase">
+          Already a member? <a href="#" class="text-purple-400 hover:text-cyan-400 transition-colors">Sign In</a>
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('signUpForm');
+    const fields = {
+        name: document.getElementById('fullname'),
+        email: document.getElementById('email'),
+        pass: document.getElementById('pass'),
+        confirm: document.getElementById('confirmPass'),
+        terms: document.getElementById('terms')
+    };
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let valid = true;
+
+        // Reset
+        Object.values(fields).forEach(f => f.classList.remove('input-error'));
+        document.querySelectorAll('.error-text').forEach(t => t.style.display = 'none');
+
+        // Validation Logic
+        if (fields.name.value.trim().length < 2) {
+            fields.name.classList.add('input-error');
+            fields.name.nextElementSibling.nextElementSibling.style.display = 'block';
+            valid = false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(fields.email.value)) {
+            fields.email.classList.add('input-error');
+            fields.email.nextElementSibling.nextElementSibling.style.display = 'block';
+            valid = false;
+        }
+
+        if (fields.pass.value.length < 8) {
+            fields.pass.classList.add('input-error');
+            valid = false;
+        }
+
+        if (fields.pass.value !== fields.confirm.value) {
+            fields.confirm.classList.add('input-error');
+            document.getElementById('match-error').style.display = 'block';
+            valid = false;
+        }
+
+        if (!fields.terms.checked) {
+            alert('Please accept the Terms of Service');
+            valid = false;
+        }
+
+        if (valid) {
+            alert('Welcome to the Dimension, ' + fields.name.value.split(' ')[0] + '!');
+        }
+    });
+  </script>
+</body>
+</html>
